@@ -10,6 +10,7 @@ import kodlama.io.Kodlama.io.Devs.Business.requests.framework.CreateFrameworkReq
 import kodlama.io.Kodlama.io.Devs.Business.requests.framework.UpdateFrameworkRequest;
 import kodlama.io.Kodlama.io.Devs.Business.responses.framework.GetAllFrameworkResponse;
 import kodlama.io.Kodlama.io.Devs.Business.responses.framework.GetByIdFrameworkResponse;
+import kodlama.io.Kodlama.io.Devs.Business.rules.FrameworkBusinessRules;
 import kodlama.io.Kodlama.io.Devs.core.utilities.mappers.ModelMapperService;
 import kodlama.io.Kodlama.io.Devs.dataAcces.abstracts.FrameworkRepository;
 import kodlama.io.Kodlama.io.Devs.entities.Framework;
@@ -21,6 +22,7 @@ public class FrameworkManager implements FrameworkService{
 
 	private FrameworkRepository frameworkRepository;
 	private ModelMapperService modelMapperService;
+	private FrameworkBusinessRules frameworkBusinessRules;
 	
 	@Override
 	public List<GetAllFrameworkResponse> getAll() {
@@ -32,6 +34,7 @@ public class FrameworkManager implements FrameworkService{
 	}
 	@Override
 	public void add(CreateFrameworkRequest createFrameworkRequest) {
+		this.frameworkBusinessRules.checkIfFrameWorkNameExistsName(createFrameworkRequest.getName());               // gelen requestin namesinden alıcam ve koyucam 
 		Framework framework = this.modelMapperService.forRequest().map(createFrameworkRequest, Framework.class);
 		this.frameworkRepository.save(framework);
 	}

@@ -12,7 +12,7 @@ public class LanguageBusinessRules{
 	
 	public void checkIfLanguageNameExist(String name) {
 		if(this.languageRepository.existsByName(name)) {
-			throw new BusinessException("Language name is already exist");
+			throw new BusinessException("Language name  already exist");
 		}
 	}
 	

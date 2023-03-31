@@ -2,6 +2,8 @@ package kodlama.io.Kodlama.io.Devs.webApi.controlles;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +34,11 @@ public class FrameworkController {
 	}
 	@PostMapping()
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public void add(@RequestBody()  CreateFrameworkRequest createFrameworkRequest) {
+	public void add(@RequestBody() @Valid() CreateFrameworkRequest createFrameworkRequest) {
 		this.frameworkService.add(createFrameworkRequest);
 	}
 	@PutMapping()
-	public void update(@RequestBody()  UpdateFrameworkRequest updateFrameworkRequest) {
+	public void update(@RequestBody() @Valid() UpdateFrameworkRequest updateFrameworkRequest) {
 		this.frameworkService.update(updateFrameworkRequest);
 	}
 	@GetMapping("/{id}")
